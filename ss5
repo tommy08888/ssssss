@@ -1,15 +1,12 @@
 #!/bin/bash
 
-# 预设的账号、密码和端口
-user="test886"
-pass="test886123"
-port="30555"
 
 # 检查是否以root权限执行
 if [[ $EUID -ne 0 ]]; then
   echo "请使用root权限运行此脚本"
   exit 1
 fi
+
 
 # 检查操作系统
 if [[ ! -f /etc/os-release ]]; then
@@ -22,24 +19,39 @@ if [[ "${ID}" != "centos" || ( "${VERSION_ID}" != "7" && "${VERSION_ID}" != "8" 
   exit 1
 fi
 
+
+# 显示命令菜单
+show_menu() {
+  echo -e
+  echo -e "\033[32m----------- AaIT.io 专注住宅IP服务器 --------------\033[0m"
+  echo -e
+  echo "1. 安装 Socks5"
+  echo "2. 重启 Socks5"
+  echo "3. 修改 Socks5"
+  echo "4. 卸载 Socks5"
+  echo "0. 退出"
+  echo -e
+}
+
+
 # 安装 Socks5
 action1() {
 if [ ! -f "/usr/local/bin/gost" ]; then
   # 下载配套程序和脚本
   echo "正在下载程序 ..."
-  curl -sSL -o /usr/local/bin/gost -L https://raw.githubusercontent.com/tommy08888/ssssss/main/gost
-  curl -sSL -o /usr/local/bin/ss5 -L https://raw.githubusercontent.com/tommy08888/ssssss/main/ss5
-  curl -sSL -o /usr/local/bin/ss5-start -L https://raw.githubusercontent.com/tommy08888/ssssss/main/ss5-start
+  curl -sSL -o /usr/local/bin/gost -L https://github.com/AaIT-io/Socks5/raw/main/gost
+  curl -sSL -o /usr/local/bin/ss5 -L https://github.com/AaIT-io/Socks5/raw/main/ss5
+  curl -sSL -o /usr/local/bin/ss5-start -L https://github.com/AaIT-io/Socks5/raw/main/ss5-start
   chmod 755 /usr/local/bin/*
   # 询问Socks5账号密码端口
-  # echo "注意Socks5的账号密码只能数字和字母不能带特殊字符否则无法启动"
-  # echo -e
-  # echo "输入Socks5账号："
-  # read user
-  # echo "输入Socks5密码："
-  # read pass
-  # echo "输入Socks5端口："
-  # read port
+  echo "注意Socks5的账号密码只能数字和字母不能带特殊字符否则无法启动"
+  echo -e
+  echo "输入Socks5账号："
+  read user
+  echo "输入Socks5密码："
+  read pass
+  echo "输入Socks5端口："
+  read port
   # 把用户输入保存到配置文件
   echo "$user" > /opt/ss5.conf
   echo "$pass" >> /opt/ss5.conf
