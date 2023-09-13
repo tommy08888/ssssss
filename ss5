@@ -11,7 +11,6 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-
 # 检查操作系统
 if [[ ! -f /etc/os-release ]]; then
   echo "无法确定操作系统类型"
@@ -22,21 +21,6 @@ if [[ "${ID}" != "centos" || ( "${VERSION_ID}" != "7" && "${VERSION_ID}" != "8" 
   echo "本脚本仅支持CentOS7或8"
   exit 1
 fi
-
-
-# 显示命令菜单
-show_menu() {
-  echo -e
-  echo -e "\033[32m----------- AaIT.io 专注住宅IP服务器 --------------\033[0m"
-  echo -e
-  echo "1. 安装 Socks5"
-  echo "2. 重启 Socks5"
-  echo "3. 修改 Socks5"
-  echo "4. 卸载 Socks5"
-  echo "0. 退出"
-  echo -e
-}
-
 
 # 安装 Socks5
 action1() {
