@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 预设的账号、密码和端口
+user="test886"
+pass="test886123"
+port="30555"
 
 # 检查是否以root权限执行
 if [[ $EUID -ne 0 ]]; then
